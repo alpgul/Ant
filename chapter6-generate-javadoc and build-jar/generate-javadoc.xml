@@ -1,0 +1,32 @@
+<?xml version = "1.0"?>
+<project name = "fax" basedir = "." default = "generate-javadoc">
+    <property name = "src.dir" value = "src"/>
+    <target name = "generate-javadoc">
+        <javadoc packagenames = "faxapp.*" sourcepath = ""
+                 destdir = "doc" version = "true" windowtitle = "Fax Application">
+
+            <doctitle><![CDATA[= Fax Application =]]></doctitle>
+
+            <bottom>
+                <![CDATA[Copyright © 2011. All Rights Reserved.]]>
+            </bottom>
+
+            <group title = "util packages" packages = "faxapp.util.*"/>
+            <group title = "web packages" packages = "faxapp.web.*"/>
+            <group title = "data packages" packages = "faxapp.entity.*:faxapp.dao.*"/>
+        </javadoc>
+
+        <echo message = "java doc has been generated!" />
+    </target>
+    <target name = "build-jar">
+        <jar destfile = "${web.dir}/lib/util.jar"
+             basedir = "${build.dir}/classes"
+             includes = "faxapp/util/**"
+             excludes = "**/Test.class">
+
+            <manifest>
+                <attribute name = "Main-Class" value = "com.tutorialspoint.util.FaxUtil"/>
+            </manifest>
+        </jar>
+    </target>
+</project>

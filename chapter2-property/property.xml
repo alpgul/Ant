@@ -1,0 +1,25 @@
+<?xml version = "1.0"?>
+<project name = "Hello World Project" default = "info">
+    <fileset id="javadoc" dir="${src}">
+        <exclude name="*/conf/**"/>
+        <exclude name="*/docs/*"/>
+        <include name="shared/**"/>
+        <include name="stand-alone/**"/>
+        <include name="web/java/**"/>
+        <depend targetdir="${docs}/api"/>
+    </fileset>
+    <target name = "test">
+        <echo>Apache Ant version is ${ant.version} - You are at ${sitename} ${line.separator}File full location:${ant.file}
+            Folder full location:${basedir}
+            Jdk version:${ant.java.version}
+            Project Name:${ant.project.name}
+            Default Target(default:info):${ant.project.default-target}
+            Çağrılan Hedefler(target name= "test"):${ant.project.invoked-targets}
+    Ant Jar Dosyası:${ant.core.lib}
+    Ant Kurulum Yeri:${ant.home}
+            Ant Kütüphane Dosyaları:${ant.library.dir}
+        </echo>
+    </target>
+
+    <property name = "sitename" value = "www.google.com"/>
+</project>

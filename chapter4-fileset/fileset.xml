@@ -1,0 +1,51 @@
+<?xml version = "1.0"?>
+<project name = "Hello World Project" default = "info">
+
+    <target name = "delete">
+     <delete>
+         <!--?:tek karakter
+         *:sıfır veya daha fazla karakter
+         **:yinelenen dizin-->
+         <fileset dir = "" casesensitive = "yes">
+             <include name = "**/*.txt"/>
+             <exclude name = "**/*.xml"/>
+         </fileset>
+         <!--casesensitive:büyük küçük harf duyarlı
+         include:txt dosyasını içeren
+         exclude:xml dosyasını içermiyen-->
+         <patternset id = "java.files.without.stubs">
+             <include name = "src/**/*.java"/>
+             <exclude name = "src/**/*Stub*"/>
+         </patternset>
+         <!--yeniden kullanılabilir patern örneğin aşağıdaki gibi-->
+         <fileset dir = "" casesensitive = "yes">
+             <patternset refid = "java.files.without.stubs"/>
+         </fileset>
+
+         <filelist id = "config.files" dir = "${webapp.src.folder}">
+             <file name = "applicationConfig.xml"/>
+             <file name = "faces-config.xml"/>
+             <file name = "web.xml"/>
+             <file name = "portlet.xml"/>
+         </filelist>
+         <!--belli dosyaları belirtirken özel karakter ifadeleri kullanılamaz-->
+     </delete>
+    </target>
+    <target name="copy">
+        <copy todir = "${basedir}/test1">
+            <fileset dir = "" includes = "**/*.txt"/>
+
+            <filterset>
+                <filter token = "VERSION" value = "${ant.java.version}"/>
+            </filterset>
+            <!--txt dosyası içerisindeki @VERSION@ İFADELERININ HEPSINE FILTERDAKI BELIRTILEN DEĞERI YAZAR DEFAILT:@ BU İŞARETTİR İSTERSEK ASAGIDAKİ GİBİ DUZENLENEBILIR-->
+            <filterset begintoken="%" endtoken="*">
+                <filter token="DATE" value="${TODAY}"/>
+            </filterset>
+            <!--BEGINTOKEN ENTOKEN ILE DEĞİŞTİRİLEBİLİR-->
+            <!--AYRINTILI BILGI:https://ant.apache.org/manual/Types/filterset.html-->
+        </copy>
+    </target>
+
+    <property name = "sitename" value = "www.google.com"/>
+</project>
